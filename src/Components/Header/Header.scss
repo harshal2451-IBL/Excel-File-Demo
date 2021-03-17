@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  padding-top: 50px !important;
+}
+
+.upload-btn-div {
+  position: relative;
+
+  .upload-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  .upload-input {
+    padding-left: 30px !important;
+    width: 300px;
+
+    &:hover {
+      color: #40a9ff;
+      border-color: #40a9ff;
+    }
+  }
+}
+
+.add-btn-div {
+  margin-left: auto;
+  position: relative;
+
+  .add-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  .add-button {
+    width: 120px;
+  }
+}
+
+.download-btn-div {
+  position: relative;
+  .download-icon {
+    position: absolute;
+    top: 10px;
+    left: 25px;
+  }
+
+  .download-button {
+    margin-left: 10px;
+    padding-left: 20px !important;
+    width: 180px;
+    background-color: #40a9ff;
+
+    &:hover {
+      background-color: #60aff0;
+    }
+  }
+}
