@@ -13,31 +13,18 @@ const DisplayTable = (props) => {
   const [inputAge, setInputAge] = useState("");
   const [inputGender, setInputGender] = useState("");
 
-  const [jsonArray, setJsonArray] = useState(...props.dataArray)
 
-  
   useEffect(() => {
-    console.log("EFFECT");
-    console.log(jsonArray);
-    let json = jsonArray
-
-    for(var i=1, j=0; i<props.dataArray.length; i++, j++){
-      jsonArray[j] = {
-        "Name": props.dataArray[i][0],
-        "Age": props.dataArray[i][1],
-        "Gender": props.dataArray[i][2]
-      }
-    }
-
-    console.log(json);
-    setJsonArray(json)
     
-    
-},[])
+      console.log(isNameClicked);
+  }, [isNameClicked])
  
 
   const handleClick = (type) => {
-    if (type === "name" && !isNameClicked) setIsNameClicked(true);
+   // alert(type)
+    if (type === "name") {
+      setIsNameClicked(true);
+    }
     else if (type === "age") setIsAgeClicked(true);
     else if (type === "gender") setIsGenderClicked(true);
   };
@@ -65,11 +52,12 @@ const DisplayTable = (props) => {
     
   }
 
-  console.log(jsonArray);
+  console.log(props.dataArray);
   console.log("render");
+  console.log(props.addRow);
   return (
     <div className="table-container">
-      <table className="table-form">
+      <table id="excelTable" className="table-form">
         <thead>
           <tr>
             <th>Name</th>
@@ -81,21 +69,20 @@ const DisplayTable = (props) => {
 
         <tbody>
           {
-           jsonArray.map((data, index) => console.log(data))
-          }
-          <tr>
+           props.dataArray.map((data, index) => (
+            <tr key={index}>
             <td>
               <div className="td-container" onClick={() => handleClick("name")}>
                 {isNameClicked ? (
                   <InputTag
                     inputClass="input"
                     inputType="text"
-                    inputValue={inputName}
+                    inputValue={data.Name}
                     onChange={(e) => handleChange(e, "name")}
                     onFocusOut={() => handleFocusOut("name")}
                   />
                 ) : (
-                  "Harshal"
+                  data.Name
                 )}
               </div>
             </td>
@@ -106,12 +93,12 @@ const DisplayTable = (props) => {
                   <InputTag
                     inputClass="input"
                     inputType="text"
-                    inputValue={inputAge}
+                    inputValue={data.Age}
                     onChange={(e) => handleChange(e, "age")}
                     onFocusOut={() => handleFocusOut("age")}
                   />
                 ) : (
-                  "Harshal"
+                  data.Age
                 )}
               </div>
             </td>
@@ -125,22 +112,25 @@ const DisplayTable = (props) => {
                   <InputTag
                     inputClass="input"
                     inputType="text"
-                    inputValue={inputGender}
+                    inputValue={data.Gender}
                     onChange={(e) => handleChange(e,"gender")}
                     onFocusOut={() => handleFocusOut("gender")}
                   />
                 ) : (
-                  "Harshal"
+                  data.Gender
                 )}
               </div>
             </td>
 
             <td>
-              <div className="delete-div">
+              <div className="delete-div" onClick={() => props.onDelete(index)}>
                 <i className="fa fa-trash-o delete-icon" aria-hidden="true"></i>
               </div>
             </td>
           </tr>
+           ))
+          }
+          
         </tbody>
       </table>
     </div>

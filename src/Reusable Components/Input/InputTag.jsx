@@ -9,8 +9,7 @@ const InputTag = (props) => {
       value={props.inputValue}
       onChange={props.onChange}
       onBlur={props.onFocusOut}
-      accept={props.accept}
-      autoFocus
+      
     />
   );
 };

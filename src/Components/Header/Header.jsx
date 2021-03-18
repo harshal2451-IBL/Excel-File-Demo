@@ -7,7 +7,9 @@ import './Header.scss'
 const Header = (props) => {
 
 
-    
+    const handle = () => {
+        alert("h")
+    }
     return(
         <div className="header">
             <div className="upload-btn-div">
@@ -28,6 +30,7 @@ const Header = (props) => {
                 <Button
                     btnClass="button add-button"
                     btnName="Add a row"
+                    onClick={props.handleAddRow}
                 />
             </div>
 
@@ -36,6 +39,7 @@ const Header = (props) => {
                 <Button
                     btnClass="button download-button"
                     btnName="Download Excel File"
+                    onClick={props.handleDownload}
                 />
             </div>
       </div>
