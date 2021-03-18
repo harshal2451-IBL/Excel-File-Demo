@@ -66,6 +66,17 @@
   }
 }
 
+.pdf-button {
+  margin-left: 10px;
+  padding-left: 20px !important;
+  width: 180px;
+  background-color: rgb(235, 156, 10);
+
+  &:hover {
+    background-color: rgb(216, 164, 69);
+  }
+}
+
 /* 
   ##Device = Most of the Smartphones Mobiles (Portrait)
   ##Screen = B/w 320px to 479px

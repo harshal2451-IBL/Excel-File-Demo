@@ -36,6 +36,15 @@ const Header = (props) => {
             onClick={props.handleDownload}
           />
         </div>
+
+        <div className="download-btn-div">
+          <i className="fa fa-download download-icon" aria-hidden="true"></i>
+          <Button
+            btnClass="button pdf-button"
+            btnName="Download Pdf file"
+            onClick={props.handlePdf}
+          />
+        </div>
       </div>
     </div>
   );

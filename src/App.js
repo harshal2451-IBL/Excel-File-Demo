@@ -5,7 +5,10 @@ import Header from "./Components/Header";
 import * as XLSX from "xlsx";
 import React, { useState } from "react";
 import Sample from "./SampleExcelFile/sample.xlsx";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
+let dataParse;
 function App() {
   const [dataArray, setDataArray] = useState([]);
 
@@ -19,7 +22,7 @@ function App() {
       const wsname = readedData.SheetNames[0];
       const ws = readedData.Sheets[wsname];
 
-      const dataParse = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      dataParse = XLSX.utils.sheet_to_json(ws, { header: 1 });
 
       let json = [];
 
@@ -93,6 +96,24 @@ function App() {
     for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
     return buf;
   }
+
+  const handlePdf = () => {
+    var doc = new jsPDF();
+
+    let array = [];
+    for (var i = 1; i < dataParse.length; i++) {
+      array.push(dataParse[i]);
+    }
+
+    console.log(array);
+
+    doc.autoTable({
+      head: [["Name", "Age", "Gender"]],
+      body: array,
+    });
+
+    doc.save("table.pdf");
+  };
   return (
     <div className="App">
       <a href={Sample} download>
@@ -103,6 +124,8 @@ function App() {
         handleFile={handleFile}
         handleAddRow={handleAddRow}
         handleDownload={handleDownload}
+        handlePdf={handlePdf}
+        dataArray={dataArray}
       />
 
       <DisplayTable
