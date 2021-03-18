@@ -23,8 +23,12 @@
   }
 }
 
-.add-btn-div {
+.right {
   margin-left: auto;
+  display: flex;
+}
+
+.add-btn-div {
   position: relative;
 
   .add-icon {
@@ -35,6 +39,10 @@
 
   .add-button {
     width: 120px;
+
+    &:hover {
+      background-color: rgb(170, 168, 168);
+    }
   }
 }
 
@@ -55,5 +63,21 @@
     &:hover {
       background-color: #60aff0;
     }
+  }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .right {
+    padding-top: 50px;
+    margin: 0 !important;
   }
 }
