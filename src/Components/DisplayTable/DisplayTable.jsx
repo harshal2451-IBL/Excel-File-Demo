@@ -10,7 +10,21 @@ const DisplayTable = (props) => {
   const [inputAge, setInputAge] = useState([]);
   const [inputGender, setInputGender] = useState([]);
 
+  function hideAllInput() {
+    let data = [...props.dataArray];
+
+    for (var i = 0; i < data.length; i++) {
+      data[i].Name[1] = false;
+      data[i].Age[1] = false;
+      data[i].Gender[1] = false;
+    }
+
+    props.setDataArray(data);
+  }
+
   const handleClick = (type, index) => {
+    hideAllInput();
+
     let data = [...props.dataArray];
     if (type === "name") {
       data[index].Name[1] = true;
@@ -45,8 +59,9 @@ const DisplayTable = (props) => {
   };
 
   const handleChange = (e, type) => {
-    if (type === "name") setInputName(e.target.value);
-    else if (type === "age") {
+    if (type === "name") {
+      setInputName(e.target.value);
+    } else if (type === "age") {
       setInputAge(e.target.value);
     } else if (type === "gender") setInputGender(e.target.value);
   };

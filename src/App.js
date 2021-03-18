@@ -42,9 +42,9 @@ function App() {
 
   const handleAddRow = () => {
     let addRow = {
-      Name: "User's name",
-      Age: "22",
-      Gender: "Female",
+      Name: ["User's name", false],
+      Age: ["22", false],
+      Gender: ["Female", false],
     };
 
     setDataArray([addRow, ...dataArray]);
