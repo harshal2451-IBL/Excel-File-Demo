@@ -6,7 +6,6 @@ import "./Header.scss";
 const Header = (props) => {
   return (
     <div className="header">
-      <div className="button-container"></div>
       <div className="upload-btn-div">
         <span>
           <i className="fa fa-upload upload-icon" aria-hidden="true"></i>
@@ -29,20 +28,34 @@ const Header = (props) => {
         </div>
 
         <div className="download-btn-div">
-          <i className="fa fa-download download-icon" aria-hidden="true"></i>
           <Button
             btnClass="button download-button"
-            btnName="Download Excel File"
+            btnName={
+              <>
+                <i
+                  className="fa fa-download download-icon"
+                  aria-hidden="true"
+                ></i>
+                <span>Download Excel file</span>
+              </>
+            }
             onClick={props.handleDownload}
             disabled={props.dataArray.length === 0 && true}
           />
         </div>
 
         <div className="download-btn-div">
-          <i className="fa fa-download download-icon" aria-hidden="true"></i>
           <Button
             btnClass="button pdf-button"
-            btnName="Download Pdf file"
+            btnName={
+              <>
+                <i
+                  className="fa fa-download download-icon"
+                  aria-hidden="true"
+                ></i>
+                <span>Download Pdf file</span>
+              </>
+            }
             onClick={props.handlePdf}
             disabled={props.dataArray.length === 0 && true}
           />

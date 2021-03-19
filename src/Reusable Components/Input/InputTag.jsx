@@ -8,6 +8,7 @@ const InputTag = (props) => {
       className={props.inputClass}
       type={props.inputType}
       value={props.inputValue}
+      placeholder={props.placeHolder}
       onChange={props.onChange}
       onBlur={props.onFocusOut}
     />

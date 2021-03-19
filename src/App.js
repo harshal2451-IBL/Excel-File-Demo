@@ -6,7 +6,10 @@ import * as XLSX from "xlsx";
 import React, { useState, useEffect } from "react";
 import Sample from "./SampleExcelFile/sample.xlsx";
 import jsPDF from "jspdf";
+import * as autoTable from "jspdf-autotable";
+import moment from "moment";
 
+let dataParse;
 function App() {
   const [dataArray, setDataArray] = useState([]);
 
@@ -14,25 +17,33 @@ function App() {
     if (dataArray.length === 0)
       document.getElementById("fileInput").value = null;
   }, [dataArray]);
+
   const readFile = (file) => {
     const fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
 
     fileReader.onload = (e) => {
       var data = e.target.result;
-      let readedData = XLSX.read(data, { type: "binary" });
+      let readedData = XLSX.read(data, {
+        type: "binary",
+        cellDates: true,
+        cellNF: false,
+        cellText: false,
+      });
       const wsname = readedData.SheetNames[0];
       const ws = readedData.Sheets[wsname];
 
-      const dataParse = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      dataParse = XLSX.utils.sheet_to_json(ws, { header: 1 });
 
       let json = [];
-
+      console.log(dataParse[0]);
       for (var i = 1, j = 0; i < dataParse.length; i++) {
+        if (dataParse[i][0] === undefined) continue;
         json[j++] = {
           Name: [dataParse[i][0], false],
           Age: [dataParse[i][1], false],
           Gender: [dataParse[i][2], false],
+          Date: [moment(dataParse[1][3]).format("MM/DD/YYYY"), false],
         };
       }
 
@@ -50,6 +61,7 @@ function App() {
       Name: ["User's name", false],
       Age: ["22", false],
       Gender: ["Female", false],
+      Date: [moment(new Date()).format("MM/DD/YYYY"), false],
     };
 
     setDataArray([addRow, ...dataArray]);
@@ -71,6 +83,7 @@ function App() {
         Name: dataArray[i].Name[0],
         Age: dataArray[i].Age[0],
         Gender: dataArray[i].Gender[0],
+        Date: dataArray[i].Date[0],
       };
     }
 
@@ -109,11 +122,12 @@ function App() {
         dataArray[i].Name[0],
         dataArray[i].Age[0],
         dataArray[i].Gender[0],
+        dataArray[i].Date[0],
       ];
     }
 
     doc.autoTable({
-      head: [["Name", "Age", "Gender"]],
+      head: [dataParse[0]],
       body: json,
     });
 

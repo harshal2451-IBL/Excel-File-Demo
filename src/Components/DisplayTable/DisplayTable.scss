@@ -1,9 +1,26 @@
 .table-container {
   padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .table-form {
-  width: 100%;
+  width: 95%;
+  box-shadow: 0 6px 15px #8d8c8c;
+
+  .table-body {
+    overflow-y: scroll;
+  }
+
+  .no-record {
+    text-align: center;
+
+    p {
+      color: rgb(179, 174, 174);
+    }
+  }
 
   th {
     text-align: left;
@@ -12,7 +29,7 @@
     border-bottom: 1px solid #e8e8e8;
   }
 
-  tr:hover {
+  .change-color:hover {
     background-color: #e6f7ff;
   }
   td {
@@ -77,4 +94,62 @@
 
 .__react_component_tooltip {
   opacity: 100% !important;
+}
+
+.table-footer {
+  display: flex;
+  padding: 20px;
+}
+.footer-content {
+  margin-left: auto;
+  display: flex;
+
+  p {
+    font-weight: normal !important;
+    color: black !important;
+    margin-right: 15px;
+  }
+
+  .left-aerrow,
+  .right-aerrow {
+    color: rgb(170, 162, 162);
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .left-aerrow {
+    margin-right: 10px;
+  }
+}
+
+.search-container {
+  margin-left: auto;
+  position: relative;
+  padding-bottom: 20px;
+  height: 40px;
+
+  .search-input {
+    position: absolute;
+    right: 10px;
+    width: 180px !important;
+    border: 1px solid black;
+  }
+}
+
+.error-msg {
+  color: red;
+  font-size: 10px;
+}
+
+.date-show {
+  text-decoration: none;
+  color: black !important;
+  font-weight: normal !important;
+}
+
+.react-datepicker__input-container {
+  input {
+    padding: 3px 5px !important;
+    width: 100px !important;
+  }
 }
