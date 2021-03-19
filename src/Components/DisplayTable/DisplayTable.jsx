@@ -359,6 +359,12 @@ const DisplayTable = (props) => {
                         btnName="Cancel"
                         onClick={handleCancel}
                       />
+
+                      <Button
+                        btnClass="button tooltip-ok"
+                        btnName="Ok"
+                        onClick={handleDelete}
+                      />
                     </div>
                   </ReactTooltip>
                 </div>
