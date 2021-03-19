@@ -34,6 +34,7 @@ const Header = (props) => {
             btnClass="button download-button"
             btnName="Download Excel File"
             onClick={props.handleDownload}
+            disabled={props.dataArray.length === 0 && true}
           />
         </div>
 
@@ -43,6 +44,7 @@ const Header = (props) => {
             btnClass="button pdf-button"
             btnName="Download Pdf file"
             onClick={props.handlePdf}
+            disabled={props.dataArray.length === 0 && true}
           />
         </div>
       </div>

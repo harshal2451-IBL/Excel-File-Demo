@@ -3,7 +3,7 @@ import saveAs from "file-saver";
 import DisplayTable from "./Components/DisplayTable";
 import Header from "./Components/Header";
 import * as XLSX from "xlsx";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sample from "./SampleExcelFile/sample.xlsx";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -12,6 +12,10 @@ let dataParse;
 function App() {
   const [dataArray, setDataArray] = useState([]);
 
+  useEffect(() => {
+    if (dataArray.length === 0)
+      document.getElementById("fileInput").value = null;
+  }, [dataArray]);
   const readFile = (file) => {
     const fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
@@ -100,19 +104,22 @@ function App() {
   const handlePdf = () => {
     var doc = new jsPDF();
 
-    let array = [];
-    for (var i = 1; i < dataParse.length; i++) {
-      array.push(dataParse[i]);
-    }
+    let json = [];
 
-    console.log(array);
+    for (var i = 0, j = 0; i < dataArray.length; i++) {
+      json[j++] = [
+        dataArray[i].Name[0],
+        dataArray[i].Age[0],
+        dataArray[i].Gender[0],
+      ];
+    }
 
     doc.autoTable({
       head: [["Name", "Age", "Gender"]],
-      body: array,
+      body: json,
     });
 
-    doc.save("table.pdf");
+    doc.save("table-pdf.pdf");
   };
   return (
     <div className="App">
