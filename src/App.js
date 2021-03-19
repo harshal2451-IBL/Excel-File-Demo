@@ -6,9 +6,7 @@ import * as XLSX from "xlsx";
 import React, { useState, useEffect } from "react";
 import Sample from "./SampleExcelFile/sample.xlsx";
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 
-let dataParse;
 function App() {
   const [dataArray, setDataArray] = useState([]);
 
@@ -26,7 +24,7 @@ function App() {
       const wsname = readedData.SheetNames[0];
       const ws = readedData.Sheets[wsname];
 
-      dataParse = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      const dataParse = XLSX.utils.sheet_to_json(ws, { header: 1 });
 
       let json = [];
 
